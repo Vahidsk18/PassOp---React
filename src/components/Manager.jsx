@@ -71,16 +71,14 @@ function Manager() {
     };
 
     return (
-        <div
-            className={`min-h-screen flex flex-col transition-colors duration-300 ${isDark ? 'bg-[#0D0C0C]' : 'bg-[#D1D1CE]'}`}
+        <div className={`min-h-screen flex flex-col transition-colors duration-300 ${isDark ? 'bg-[#080C17]' : 'bg-[#e8f5ee]'}`}
             style={isDark ? {
-                backgroundImage: 'linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)',
+                backgroundImage: 'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
                 backgroundSize: '24px 24px'
             } : {
-                backgroundImage: 'linear-gradient(rgba(0,0,0,0.09) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.09) 1px, transparent 1px)',
+                backgroundImage: 'linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px)',
                 backgroundSize: '24px 24px'
-            }}
-        >
+            }}>
 
             {/* ── Page body grows to push footer down ── */}
             <div className="flex-1">
@@ -93,7 +91,7 @@ function Manager() {
                         <h1 className={`text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
                             {"<"}Pass<span className="text-green-500">OP</span>{"/>"}
                         </h1>
-                        <p className={`mt-1 text-sm ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Your own Password Manager</p>
+                        <p className={`mt-1 text-sm ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>Your own Password Manager</p>
                     </div>
 
                     {/* URL Input */}
@@ -103,8 +101,8 @@ function Manager() {
                         name='website'
                         value={form.website}
                         onChange={handleChange}
-                        className={`w-full h-10 rounded-full border px-5 text-sm outline-none focus:ring-2 focus:ring-green-400 transition-all mb-4
-                            ${isDark ? 'bg-[#1e293b] border-gray-600 text-white placeholder-gray-500' : 'bg-white border-green-300 text-gray-700'}`}
+                        className={`w-full h-10 rounded-full border px-5 text-sm outline-none focus:ring-2 focus:ring-green-500 transition-all mb-4
+                    ${isDark ? 'bg-[#0e1422] border-[#2a3350] text-gray-200 placeholder-gray-600' : 'bg-white border-green-300 text-gray-700'}`}
                     />
 
                     {/* Username + Password Row */}
@@ -115,8 +113,8 @@ function Manager() {
                             name='name'
                             value={form.name}
                             onChange={handleChange}
-                            className={`flex-1 h-10 rounded-full border px-5 text-sm outline-none focus:ring-2 focus:ring-green-400 transition-all
-                                ${isDark ? 'bg-[#1e293b] border-gray-600 text-white placeholder-gray-500' : 'bg-white border-green-300 text-gray-700'}`}
+                            className={`flex-1 h-10 rounded-full border px-5 text-sm outline-none focus:ring-2 focus:ring-green-500 transition-all
+                        ${isDark ? 'bg-[#0e1422] border-[#2a3350] text-gray-200 placeholder-gray-600' : 'bg-white border-green-300 text-gray-700'}`}
                         />
                         <div className="relative w-48">
                             <input
@@ -125,8 +123,8 @@ function Manager() {
                                 name='password'
                                 value={form.password}
                                 onChange={handleChange}
-                                className={`w-full h-10 rounded-full border px-5 pr-10 text-sm outline-none focus:ring-2 focus:ring-green-400 transition-all
-                                    ${isDark ? 'bg-[#1e293b] border-gray-600 text-white placeholder-gray-500' : 'bg-white border-green-300 text-gray-700'}`}
+                                className={`w-full h-10 rounded-full border px-5 pr-10 text-sm outline-none focus:ring-2 focus:ring-green-500 transition-all
+                            ${isDark ? 'bg-[#0e1422] border-[#2a3350] text-gray-200 placeholder-gray-600' : 'bg-white border-green-300 text-gray-700'}`}
                             />
                             <button
                                 type="button"
@@ -134,8 +132,8 @@ function Manager() {
                                 className="absolute right-3 top-1/2 -translate-y-1/2"
                             >
                                 {showPassword
-                                    ? <FaEyeSlash className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
-                                    : <FaEye className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
+                                    ? <FaEyeSlash className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-500'}`} />
+                                    : <FaEye className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-500'}`} />
                                 }
                             </button>
                         </div>
@@ -143,7 +141,7 @@ function Manager() {
 
                     {/* Save Button */}
                     <div className="flex justify-center">
-                        <button onClick={savePassword} className="flex items-center gap-2 px-7 py-2 text-sm font-semibold rounded-full bg-green-400 hover:bg-green-500 active:scale-95 transition-all shadow-md">
+                        <button onClick={savePassword} className="flex items-center gap-2 px-7 py-2 text-sm font-semibold rounded-full bg-green-500 hover:bg-green-600 active:scale-95 transition-all shadow-md text-white">
                             <FaPlusSquare className="text-base animate-bounce" />
                             {editIndex !== null ? 'Edit Password' : 'Save Password'}
                         </button>
@@ -155,22 +153,22 @@ function Manager() {
                 <div className="mt-10">
                     {passwordArray.length === 0 ? (
                         <div className="flex justify-center">
-                            <div className={`flex items-center gap-3 px-8 py-4 rounded-3xl shadow-sm border ${isDark ? 'bg-[#1e293b] border-gray-700 text-gray-400' : 'bg-white border-green-200 text-gray-500'}`}>
+                            <div className={`flex items-center gap-3 px-8 py-4 rounded-3xl shadow-sm border ${isDark ? 'bg-[#0e1422] border-[#2a3350] text-gray-500' : 'bg-white border-green-200 text-gray-500'}`}>
                                 <span className="text-xl">📭</span>
                                 <span className="text-base font-medium">No Passwords Saved Yet</span>
                             </div>
                         </div>
                     ) : (
                         <div className="max-w-4xl mx-auto px-4 pb-10">
-                            <h2 className={`text-xl font-bold mb-3 ${isDark ? 'text-white' : 'text-gray-800'}`}>
+                            <h2 className={`text-xl font-bold mb-3 ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
                                 Your Passwords
                             </h2>
 
-                            <div className="w-full overflow-x-auto rounded-xl shadow-md border border-green-200">
+                            <div className={`w-full overflow-x-auto rounded-xl shadow-md border ${isDark ? 'border-[#2a3350]' : 'border-green-200'}`}>
                                 <table className="min-w-full text-sm border-collapse">
 
                                     <thead>
-                                        <tr className="bg-[#2e7d4f] text-white">
+                                        <tr className={isDark ? 'bg-[#0f1e35] text-green-400' : 'bg-[#2e7d4f] text-white'}>
                                             <th className="py-3 px-5 text-center font-semibold tracking-wide whitespace-nowrap">Site</th>
                                             <th className="py-3 px-5 text-center font-semibold tracking-wide whitespace-nowrap">Username</th>
                                             <th className="py-3 px-5 text-center font-semibold tracking-wide whitespace-nowrap">Password</th>
@@ -183,18 +181,18 @@ function Manager() {
                                             <tr
                                                 key={i}
                                                 className={`border-t transition-colors duration-150 ${isDark
-                                                    ? `border-gray-700 ${i % 2 === 0 ? 'bg-[#1e293b]' : 'bg-[#162032]'}`
+                                                    ? `border-[#1e2a40] ${i % 2 === 0 ? 'bg-[#0b0f1c]' : 'bg-[#0e1422]'} hover:bg-[#131929]`
                                                     : `border-green-100 ${i % 2 === 0 ? 'bg-[#f0faf4]' : 'bg-[#e6f5ec]'} hover:bg-[#d4edda]`
                                                     }`}
                                             >
                                                 {/* Site */}
-                                                <td className={`py-3 px-5 text-center ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                                                <td className={`py-3 px-5 text-center ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
                                                     <div className="flex items-center justify-center gap-1.5 min-w-0">
                                                         <a
                                                             href={p.website.startsWith("http://") || p.website.startsWith("https://") ? p.website : `https://${p.website}`}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className="hover:underline hover:text-green-600 transition-colors"
+                                                            className={`hover:underline transition-colors ${isDark ? 'hover:text-green-400' : 'hover:text-green-600'}`}
                                                         >
                                                             <span className="underline truncate max-w-[160px] sm:max-w-xs md:max-w-sm block">
                                                                 {p.website}
@@ -202,7 +200,7 @@ function Manager() {
                                                         </a>
                                                         <FaCopy
                                                             onClick={() => copyFun(p.website)}
-                                                            className="shrink-0 text-gray-400 cursor-pointer hover:text-green-600 transition-colors"
+                                                            className={`shrink-0 cursor-pointer transition-colors ${isDark ? 'text-gray-600 hover:text-green-400' : 'text-gray-400 hover:text-green-600'}`}
                                                             title="Copy site"
                                                             size={12}
                                                         />
@@ -210,12 +208,12 @@ function Manager() {
                                                 </td>
 
                                                 {/* Username */}
-                                                <td className={`py-3 px-5 text-center ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                                                <td className={`py-3 px-5 text-center ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
                                                     <div className="flex items-center justify-center gap-1.5">
                                                         <span>{p.name}</span>
                                                         <FaCopy
                                                             onClick={() => copyFun(p.name)}
-                                                            className="shrink-0 text-gray-400 cursor-pointer hover:text-green-600 transition-colors"
+                                                            className={`shrink-0 cursor-pointer transition-colors ${isDark ? 'text-gray-600 hover:text-green-400' : 'text-gray-400 hover:text-green-600'}`}
                                                             title="Copy username"
                                                             size={12}
                                                         />
@@ -223,7 +221,7 @@ function Manager() {
                                                 </td>
 
                                                 {/* Password */}
-                                                <td className={`py-3 px-5 text-center ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                                                <td className={`py-3 px-5 text-center ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
                                                     <div className="flex items-center justify-center gap-1.5">
                                                         <span className="font-mono">
                                                             {visibleRows[i] ? p.password : "*".repeat(p.password.length)}
@@ -231,14 +229,14 @@ function Manager() {
                                                         <button
                                                             type="button"
                                                             onClick={() => toggleRowPassword(i)}
-                                                            className="text-gray-400 hover:text-green-600 transition-colors"
+                                                            className={`transition-colors ${isDark ? 'text-gray-600 hover:text-green-400' : 'text-gray-400 hover:text-green-600'}`}
                                                             title={visibleRows[i] ? "Hide" : "Show"}
                                                         >
                                                             {visibleRows[i] ? <FaEyeSlash size={12} /> : <FaEye size={12} />}
                                                         </button>
                                                         <FaCopy
                                                             onClick={() => copyFun(p.password)}
-                                                            className="shrink-0 text-gray-400 cursor-pointer hover:text-green-600 transition-colors"
+                                                            className={`shrink-0 cursor-pointer transition-colors ${isDark ? 'text-gray-600 hover:text-green-400' : 'text-gray-400 hover:text-green-600'}`}
                                                             title="Copy password"
                                                             size={12}
                                                         />
@@ -250,7 +248,7 @@ function Manager() {
                                                     <div className="flex items-center justify-center gap-4">
                                                         <FaEdit
                                                             onClick={() => editFun(p, i)}
-                                                            className="text-green-600 cursor-pointer hover:text-green-400 transition-colors"
+                                                            className={`cursor-pointer transition-colors ${isDark ? 'text-green-500 hover:text-green-300' : 'text-green-600 hover:text-green-400'}`}
                                                             title="Edit"
                                                         />
                                                         <FaTrash
@@ -272,9 +270,9 @@ function Manager() {
             </div>{/* end flex-1 */}
 
             {/* ── Footer always at bottom ── */}
-            <footer className={`text-center py-6 text-sm flex justify-center items-center gap-2 transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-800'}`}>
+            <footer className={`text-center py-6 text-sm flex justify-center items-center gap-2 transition-colors duration-300 ${isDark ? 'text-gray-600' : 'text-gray-600'}`}>
                 <a href="https://github.com/Vahidsk18/" target="_blank" rel="noopener noreferrer">
-                    <FaGithub className={`text-base transition-colors ${isDark ? 'hover:text-white' : 'hover:text-gray-900'}`} />
+                    <FaGithub className={`text-base transition-colors ${isDark ? 'hover:text-gray-300' : 'hover:text-gray-900'}`} />
                 </a>
                 <span>Made with ❤️ — ©Vsk {new Date().getFullYear()}</span>
             </footer>

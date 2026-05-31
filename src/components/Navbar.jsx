@@ -16,7 +16,7 @@ function Navbar() {
                 onClick={toggleTheme}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300
                 ${isDark
-                        ? 'border border-green-400 text-green-400'
+                        ? 'border border-green-300 text-green-400'
                         : 'border border-green-300 text-green-300 hover:bg-green-400/20 hover:border-green-400 hover:text-green-400'
                     }`}
             >
