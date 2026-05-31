@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://passop-vsk.vercel.app/sitemap.xml
