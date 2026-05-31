@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { FaEye, FaEyeSlash, FaPlusSquare, FaTrash, FaEdit, FaCopy } from "react-icons/fa";
 import { showSuccess, showError, showInfo, showWarn } from '../utils/toast';
 import { useTheme } from '../context_api/ThemeContext';
+import { Link } from 'react-router-dom';
+
 
 function Manager() {
 
@@ -24,7 +26,7 @@ function Manager() {
     }
 
     function savePassword() {
-        if (!form.website || !form.name || !form.password) return alert("Enter Information");
+        if (!form.website || !form.name || !form.password) return showWarn("Enter Information");
 
         let updatedArray;
         if (editIndex !== null) {
@@ -132,13 +134,15 @@ function Manager() {
                 <div className="flex justify-center">
                     <button onClick={savePassword} className="flex items-center gap-2 px-7 py-2 text-sm font-semibold rounded-full bg-green-400 hover:bg-green-500 active:scale-95 transition-all shadow-md">
                         <FaPlusSquare className="text-base animate-bounce" />
-                        {editIndex !== null ? 'Edit Password' : 'Add Password'}
+                        {editIndex !== null ? 'Edit Password' : 'Save Password'}
                     </button>
                 </div>
 
             </div>
 
             <br /><br />
+
+            {/* // Replace your existing table section with this */}
 
             {passwordArray.length === 0 ? (
                 <div className="flex justify-center mt-8">
@@ -149,47 +153,106 @@ function Manager() {
                 </div>
             ) : (
                 <div className="max-w-4xl mx-auto px-4 pb-10">
-                    <div className={`rounded-3xl shadow-md overflow-hidden border ${isDark ? 'bg-[#1e293b] border-gray-700' : 'bg-white border-green-200'}`}>
-                        <h2 className={`text-center text-lg font-bold py-4 border-b ${isDark ? 'bg-[#162032] border-gray-700 text-white' : 'bg-green-50 border-green-100 text-gray-700'}`}>
-                            Your Saved Passwords
-                        </h2>
+                    <h2 className={`text-xl font-bold mb-3 ${isDark ? 'text-white' : 'text-gray-800'}`}>
+                        Your Passwords
+                    </h2>
 
-                        <table className="w-full text-sm table-fixed">
-                            <thead className="bg-green-500 text-white">
-                                <tr>
-                                    <th className="py-3 px-6 text-left font-semibold">Website</th>
-                                    <th className="py-3 px-6 text-left font-semibold">Username</th>
-                                    <th className="py-3 px-6 text-left font-semibold">Password</th>
-                                    <th className="py-3 px-6 text-center font-semibold w-28">Actions</th>
+                    {/* Responsive scroll wrapper */}
+                    <div className="w-full overflow-x-auto rounded-xl shadow-md border border-green-200  ">
+                        <table className="min-w-full text-sm border-collapse">
+
+                            {/* ── Header: dark green like screenshot ── */}
+                            <thead>
+                                <tr className="bg-[#2e7d4f] text-white bg-green-600">
+                                    <th className="py-3 px-5 text-center font-semibold tracking-wide whitespace-nowrap">Site</th>
+                                    <th className="py-3 px-5 text-center font-semibold tracking-wide whitespace-nowrap">Username</th>
+                                    <th className="py-3 px-5 text-center font-semibold tracking-wide whitespace-nowrap">Password</th>
+                                    <th className="py-3 px-5 text-center font-semibold tracking-wide whitespace-nowrap w-28">Actions</th>
                                 </tr>
                             </thead>
+
+                            {/* ── Body: alternating light green rows ── */}
                             <tbody>
                                 {passwordArray.map((p, i) => (
-                                    <tr key={i} className={`border-t ${isDark
-                                        ? `border-gray-700 ${i % 2 === 0 ? 'bg-[#1e293b]' : 'bg-[#162032]'}`
-                                        : `border-green-100 ${i % 2 === 0 ? 'bg-white' : 'bg-green-50'}`}`}>
+                                    <tr
+                                        key={i}
+                                        className={`border-t transition-colors duration-150 ${isDark
+                                            ? `border-gray-700 ${i % 2 === 0 ? 'bg-[#1e293b]' : 'bg-[#162032]'}`
+                                            : `border-green-100 ${i % 2 === 0 ? 'bg-[#f0faf4]' : 'bg-[#e6f5ec]'} hover:bg-[#d4edda]`
+                                            }`}
+                                    >
+                                        {/* Site */}
+                                        <td className={`py-3 px-5 text-center ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                                            <div className="flex items-center justify-center gap-1.5 min-w-0">
 
-                                        <td className={`py-4 px-6 break-all ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{p.website}</td>
-                                        <td className={`py-4 px-6 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{p.name}</td>
-                                        <td className="py-4 px-6">
-                                            <div className="flex items-center gap-2">
-                                                <span className={`font-mono ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                                                    {visibleRows[i] ? p.password : "••••••••••"}
+                                                <a
+                                                    href={p.website.startsWith("http://") || p.website.startsWith("https://") ? p.website : `https://${p.website}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className=" hover:underline hover:text-green-600 transition-colors"
+                                                >
+                                                    <span className="underline truncate max-w-[160px] sm:max-w-xs md:max-w-sm block">
+                                                        {p.website}
+                                                    </span>
+                                                </a>
+                                                <FaCopy
+                                                    onClick={() => copyFun(p.website)}
+                                                    className="shrink-0 text-gray-400 cursor-pointer hover:text-green-600 transition-colors"
+                                                    title="Copy site"
+                                                    size={12}
+                                                />
+                                            </div>
+                                        </td>
+
+                                        {/* Username */}
+                                        <td className={`py-3 px-5 text-center ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                                            <div className="flex items-center justify-center gap-1.5">
+                                                <span>{p.name}</span>
+                                                <FaCopy
+                                                    onClick={() => copyFun(p.name)}
+                                                    className="shrink-0 text-gray-400 cursor-pointer hover:text-green-600 transition-colors"
+                                                    title="Copy username"
+                                                    size={12}
+                                                />
+                                            </div>
+                                        </td>
+
+                                        {/* Password */}
+                                        <td className={`py-3 px-5 text-center ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                                            <div className="flex items-center justify-center gap-1.5">
+                                                <span className="font-mono">
+                                                    {visibleRows[i] ? p.password : "*".repeat(p.password.length)}
                                                 </span>
                                                 <button
                                                     type="button"
                                                     onClick={() => toggleRowPassword(i)}
-                                                    className="text-gray-400 hover:text-green-500 transition-colors"
+                                                    className="text-gray-400 hover:text-green-600 transition-colors"
+                                                    title={visibleRows[i] ? "Hide" : "Show"}
                                                 >
-                                                    {visibleRows[i] ? <FaEyeSlash className="text-sm" /> : <FaEye className="text-sm" />}
+                                                    {visibleRows[i] ? <FaEyeSlash size={12} /> : <FaEye size={12} />}
                                                 </button>
+                                                <FaCopy
+                                                    onClick={() => copyFun(p.password)}
+                                                    className="shrink-0 text-gray-400 cursor-pointer hover:text-green-600 transition-colors"
+                                                    title="Copy password"
+                                                    size={12}
+                                                />
                                             </div>
                                         </td>
-                                        <td className="py-4 px-6">
+
+                                        {/* Actions */}
+                                        <td className="py-3 px-5 text-center">
                                             <div className="flex items-center justify-center gap-4">
-                                                <FaCopy onClick={() => copyFun(p.password)} className="text-green-500 cursor-pointer hover:text-green-400" title="Copy" />
-                                                <FaEdit onClick={() => editFun(p, i)} className="text-blue-500 cursor-pointer hover:text-blue-400" title="Edit" />
-                                                <FaTrash onClick={() => delFun(i)} className="text-red-500 cursor-pointer hover:text-red-400" title="Delete" />
+                                                <FaEdit
+                                                    onClick={() => editFun(p, i)}
+                                                    className="text-green-600 cursor-pointer hover:text-green-400 transition-colors"
+                                                    title="Edit"
+                                                />
+                                                <FaTrash
+                                                    onClick={() => delFun(i)}
+                                                    className="text-red-500 cursor-pointer hover:text-red-400 transition-colors"
+                                                    title="Delete"
+                                                />
                                             </div>
                                         </td>
                                     </tr>
