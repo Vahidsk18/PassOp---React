@@ -5,10 +5,16 @@ const ThemeContext = createContext();
 
 // 2. Create the Provider component
 export function ThemeProvider({ children }) {
-    const [theme, setTheme] = useState('light');
+    const [theme, setTheme] = useState(() => {
+        return localStorage.getItem('theme') || 'light';
+    })
 
     const toggleTheme = () => {
-        setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+        setTheme((prevTheme) => {
+            const newTheme = prevTheme === 'light' ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+            return newTheme;
+        });
     };
 
     // Provide both the current state and the setter function
