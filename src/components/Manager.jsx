@@ -82,7 +82,7 @@ function Manager() {
                     <h1 className={`text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
                         {"<"}Pass<span className="text-green-500">OP</span>{"/>"}
                     </h1>
-                    <p className={`mt-1 text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Your own Password Manager</p>
+                    <p className={`mt-1 text-sm ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Your own Password Manager</p>
                 </div>
 
                 {/* URL Input */}
