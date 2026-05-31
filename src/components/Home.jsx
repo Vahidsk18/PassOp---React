@@ -9,7 +9,14 @@ function Home() {
 
     return (
         <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-[#0f172a]' : 'bg-[#e8f5ee]'}`}
-            style={{ backgroundImage: 'radial-gradient(circle, #c8e6d4 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+            style={isDark ? {
+                backgroundImage: 'linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)',
+                backgroundSize: '24px 24px'
+            } : {
+                backgroundImage: 'linear-gradient(rgba(0,0,0,0.09) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.09) 1px, transparent 1px)',
+                backgroundSize: '24px 24px'
+            }}
+        >
 
             {/* Hero */}
             <div className="max-w-4xl mx-auto px-6 pt-20 pb-10 text-center">
@@ -74,7 +81,7 @@ function Home() {
             </div>
 
             {/* Footer */}
-            <footer className={`text-center py-6 text-sm flex justify-center items-center gap-2 transition-colors duration-300 ${isDark ? 'text-gray-500' : 'text-gray-600'}`}>
+            <footer className={`text-center py-6 text-sm flex justify-center items-center gap-2 transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-800'}`}>
                 <Link to='https://github.com/Vahidsk18/' target="_blank"><FaGithub className="text-sm" /></Link>
                 <span>Made with ❤️ — ©Vsk {new Date().getFullYear()}</span>
             </footer>
